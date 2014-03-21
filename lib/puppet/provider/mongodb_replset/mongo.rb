@@ -20,7 +20,7 @@ Puppet::Type.type(:mongodb_replset).provide(:mongo) do
     if output['ok'] == 0
       raise Puppet::Error, "rs.initiate() failed for replicaset #{@resource[:name]}: #{output['errmsg']}"
     end
-    alive_members.each do |member|
+    alive_members_each_with_index.reject {|member, i|}.each  do |member, i|
       debug "MEMBER : #{member.to_s}"
       response = self.rs_slaveOk(member)
       debug "RESPONSE : #{response}"
